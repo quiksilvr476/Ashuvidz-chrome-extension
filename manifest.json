@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "Ashuvidz Chrome Extension",
+  "description": "C'est une extension qui permet d'être notifié quand Ashuvidz est en live",
+  "version": "0.1",
+  "default_locale": "fr",
+
+  "browser_action": {
+        "browser_action": {
+          "default_icon": {
+            "16": "images/icon16.png",
+            "24": "images/icon24.png",
+            "32": "images/icon32.png"
+          },
+          "default_title": "Ashuvidz",
+          "default_popup": "popup.html",
+        },
+      }
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
