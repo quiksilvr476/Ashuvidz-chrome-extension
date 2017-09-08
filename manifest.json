@@ -3,7 +3,7 @@
 
   "name": "Ashuvidz Chrome Extension",
   "description": "C'est une extension qui permet d'être notifié quand Ashuvidz est en live",
-  "version": "0.1",
+  "version": "0.2",
   "author": "Ronteix Valentin",
   "background": {
       "scripts": ["jquery.min.js", "background.js"]
