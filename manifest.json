@@ -1,23 +1,19 @@
 {
   "manifest_version": 2,
-
-  "name": "Ashuvidz Chrome Extension",
+  "name": "Ashuvidz extension",
+  "version": "2.0.0",
   "description": "C'est une extension qui permet d'être notifié quand Ashuvidz est en live",
-  "version": "0.2",
-  "author": "Ronteix Valentin",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
   "background": {
-      "scripts": ["jquery.min.js", "background.js"]
-    },
-  "homepage_url": "http://ashuvidz.com",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "permissions": ["storage", "alarms"],
-
-  "icons": { "16": "icon16.png",
-             "48": "icon48.png",
-            "128": "icon128.png" },
-
+    "scripts": ["background.js"]
+  },
+  "homepage_url": "https://ashuvidz.com",
+  "permissions": ["storage", "alarms" , "activeTab" , "notifications"],
   "browser_action": {
-    "default_icon": "images/offline.png",
-    "default_title": "Ashuvidz"
+    "default_title": "Ashuvidz",
+    "default_icon": "icons/icon-48.png"
   }
 }
