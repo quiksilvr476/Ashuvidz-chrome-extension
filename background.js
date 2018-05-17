@@ -1,9 +1,14 @@
 (
     () => {
 
+        // Error Manager
+        function onError (errorMessage){
+            console.log(errorMessage);
+        }
+
         // Bootstraps the plugin.
         function linkManager(item) {
-            if (!item.linkUrl || !item.isLive) {
+            if (!item) {
                 chrome.storage.local.set({
                     linkUrl:  `https://youtube.com/${twitchUserName}/`,
                     isLive: "0"
@@ -32,7 +37,7 @@
 
             // Fetching data from twitch API
             fetch(twitchUrl, twitchApiGetter).then(( response ) => {
-                return response.json()}).then( (channel)=> {
+                return response.json()}).then((channel) => {
                     //live is offline Youtube player appened
                     if (channel.data.length <= 0) {
 
@@ -78,6 +83,8 @@
                                 }
                                 // This sends a notification
 
+                                console.log(user.data[0].profile_image_url);
+
                                 chrome.notifications.create('notifTwitchOffline', {
                                     'type': 'basic',
                                     'title': channel.data[0].title,
@@ -90,7 +97,16 @@
                                     isLive: "1",
                                     linkUrl: `http://twitch.tv/${twitchUserName}/`
                                 });
-                                buffer = chrome.storage.local.get(["isLive", "linkUrl"]);
+                                buffer = new Promise(
+                                    (resolve, reject) => {
+                                        chrome.storage.local.get(['isLive', 'linkUrl'], (result) => {
+                                            if (result){
+                                                resolve(result)
+                                            } else {
+                                                reject(result)
+                                            }
+                                        })}
+                                );
                                 buffer.then(linkManager, onError);
                             })
                         });
@@ -100,11 +116,23 @@
         }
 
         const twitchApiKey = "b90nfoacg9807542cq15o2qbv2g05q";
-        const twitchUserName = "ashuvidz";
+        const twitchUserName = "twerk17";
 
-        // This starts the plugin by geeting the saved previous status.
+        // This starts the plugin by geeting the saved previous status if any.
         let local;
-        let buffer = chrome.storage.local.get(['isLive', 'linkUrl']);
+
+        // This function create the promise
+        let buffer = new Promise(
+            (resolve, reject) => {
+            chrome.storage.local.get(['isLive', 'linkUrl'], (result) => {
+                if (result){
+                    resolve(result)
+                } else {
+                    reject(result)
+                }
+            })}
+        );
+
         buffer.then(linkManager, onError);
 
         // Borwser Event Listeners. This keep application running after bootstrap.
