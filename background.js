@@ -8,18 +8,13 @@
 
         // Bootstraps the plugin.
         function linkManager(item) {
-            if (!item) {
                 chrome.storage.local.set({
                     linkUrl:  `https://youtube.com/${twitchUserName}/`,
                     isLive: "0"
                 });
                 local = item;
-                linkManager();
-            } else {
-                local = item;
                 console.log(local);
                 twitchCheck();
-            }
         }
 
         // This is the actual logic of the plugin.
@@ -82,14 +77,11 @@
                                     return;
                                 }
                                 // This sends a notification
-
-                                console.log(user.data[0].profile_image_url);
-
                                 chrome.notifications.create('notifTwitchOffline', {
                                     'type': 'basic',
                                     'title': channel.data[0].title,
                                     'message': `${twitchUserName} est en stream sur ${twitchGameName}`,
-                                    'iconUrl': user.data[0].profile_image_url
+                                    'iconUrl': 'images/avatar.jpg'
                                 });
 
                                 // Then update the local variable and get it again to ensure the promise is fired.
@@ -116,7 +108,7 @@
         }
 
         const twitchApiKey = "b90nfoacg9807542cq15o2qbv2g05q";
-        const twitchUserName = "twerk17";
+        const twitchUserName = "ashuvidz";
 
         // This starts the plugin by geeting the saved previous status if any.
         let local;
@@ -154,11 +146,5 @@
         chrome.notifications.onClicked.addListener(() => {
             chrome.tabs.create({ url: local.linkUrl });
         });
-
-        /*function increment() {
-            chrome.browserAction.setBadgeText({text: (13).toString()});
-        }
-
-        increment()*/
     }
 )();
