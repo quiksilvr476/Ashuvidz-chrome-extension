@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Ashuvidz extension",
-  "version": "2.0.0",
+  "version": "2.0.4",
   "description": "C'est une extension qui permet d'être notifié quand Ashuvidz est en live",
   "icons": {
     "48": "icons/icon-48.png",
@@ -10,7 +10,6 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "homepage_url": "https://ashuvidz.com",
   "permissions": ["storage", "alarms" , "activeTab" , "notifications"],
   "browser_action": {
     "default_title": "Ashuvidz",
